@@ -1,65 +1,83 @@
-# GraphQL Book Management
+# GraphQL Book Management App (Express + Apollo Server + Next.js App Router)
 
-這是一個基於 **GraphQL + Express + Apollo Server + Next.js** 的書籍管理應用程式，提供 **新增、刪除、更新、查詢** ，書籍的功能，可以直接使用 CRUD 無需連接資料庫。
+## Overview
 
-## 🚀 功能
+This is a **GraphQL-based Book Management Application** built with **Express.js**, **Apollo Server**, and **Next.js (App Router)**. The project allows users to **view, add, update, and delete books** using GraphQL API with an in-memory database.
 
-✅ 查詢所有書籍 (Read)
-✅ 新增書籍 (Create)
-✅ 刪除書籍 (Delete)
-✅ 更新書籍 (Update)
+## Features
 
-## 🛠 技術棧
+- **GraphQL API** for CRUD operations (Create, Read, Update, Delete)
+- **Next.js (App Router)** as the frontend framework
+- **Apollo Client** for GraphQL data fetching
+- **Express.js with Apollo Server** as the backend GraphQL server
+- **CORS support** for cross-origin requests
+- **In-memory data storage** (mock database for testing)
 
-- **後端**: Node.js, Express, Apollo Server, GraphQL
-- **前端**: Next.js, React, Apollo Client
+## Tech Stack
 
----
+### Backend
 
-## 📌 安裝與執行
+- **Node.js** with **Express.js**
+- **GraphQL** with **Apollo Server**
+- **CORS Middleware** for API security
+- **GraphQL Playground** for API testing
 
-### 1️⃣ **克隆專案**
+### Frontend
 
-```sh
-  git clone https://github.com/your-repo/graphql-book-management.git
-  cd graphql-book-management
-```
+- **Next.js (App Router)**
+- **Apollo Client** for GraphQL queries & mutations
+- **React Components** for UI
 
-### 2️⃣ **安裝後端依賴** (Server)
+## Installation
 
-```sh
-  cd server
-  npm install
-```
-
-### 3️⃣ **啟動 GraphQL 伺服器**
+### 1. Clone the Repository
 
 ```sh
-  node server.js
+git clone https://github.com/your-repo/graphql-book-management.git
+cd graphql-book-management
 ```
 
-> 預設 GraphQL 伺服器運行在 `http://localhost:4000/graphql`
+### 2. Install Dependencies
 
-### 4️⃣ **安裝前端依賴** (Client)
+#### Backend
 
 ```sh
-  cd ../client
-  npm install
+cd server
+npm install
 ```
 
-### 5️⃣ **啟動 Next.js 前端**
+#### Frontend
 
 ```sh
-  npm run dev
+cd client
+npm install
 ```
 
-> 預設前端運行在 `http://localhost:3000`
+### 3. Run the Backend Server
 
----
+```sh
+cd server
+node server.js
+```
 
-## 📜 GraphQL API 定義
+The GraphQL API will be available at: **http://localhost:4000/graphql**
 
-### **查詢所有書籍**
+### 4. Run the Frontend (Next.js)
+
+```sh
+cd client
+npm run dev
+```
+
+The frontend will be available at: **http://localhost:3000**
+
+## GraphQL API
+
+### Queries
+
+Go to [apollographql](http://localhost:4000/graphql)
+
+#### Fetch All Books
 
 ```graphql
 query GetBooks {
@@ -71,7 +89,21 @@ query GetBooks {
 }
 ```
 
-### **新增書籍**
+#### Fetch a Book by ID
+
+```graphql
+query GetBook($id: ID!) {
+  book(id: $id) {
+    id
+    title
+    author
+  }
+}
+```
+
+### Mutations
+
+#### Add a New Book
 
 ```graphql
 mutation AddBook($title: String!, $author: String!) {
@@ -83,18 +115,7 @@ mutation AddBook($title: String!, $author: String!) {
 }
 ```
 
-### **刪除書籍**
-
-```graphql
-mutation DeleteBook($id: ID!) {
-  deleteBook(id: $id) {
-    id
-    title
-  }
-}
-```
-
-### **更新書籍**
+#### Update a Book
 
 ```graphql
 mutation UpdateBook($id: ID!, $title: String, $author: String) {
@@ -106,19 +127,30 @@ mutation UpdateBook($id: ID!, $title: String, $author: String) {
 }
 ```
 
----
+#### Delete a Book
 
-## 📂 專案目錄結構
+```graphql
+mutation DeleteBook($id: ID!) {
+  deleteBook(id: $id) {
+    id
+  }
+}
+```
+
+## Project Structure
 
 ```
 /graphql-book-management
- ├── server               # 後端目錄 (GraphQL API)
- │   ├── server.js        # Express 伺服器
- │   ├── schema.js        # GraphQL Schema (定義 Query & Mutation)
- │   └── package.json     # 伺服器依賴
- │
- ├── client               # 前端目錄 (Next.js)
- │   ├── pages/index.js   # 前端主頁
- │   ├── package.json     # 前端依賴
- │   └── ...
+│── server               # Backend API (Express + Apollo Server)
+│   ├── data.js          # Mock database
+│   ├── schema.js        # GraphQL schema
+│   ├── server.js        # Express server setup
+│   └── package.json     # Dependencies & scripts
+│
+│── client               # Frontend (Next.js App Router)
+│   ├── src/app          # Next.js App Router structure
+│   │   ├── page.js      # Home page
+│   ├── package.json     # Dependencies & scripts
+│
+└── README.md            # Project documentation
 ```

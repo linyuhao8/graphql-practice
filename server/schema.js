@@ -1,10 +1,6 @@
 const { gql } = require("apollo-server-express");
-
+const { books } = require("./data");
 // 模擬的資料庫
-let books = [
-  { id: "1", title: "GraphQL 初學指南", author: "Alice" },
-  { id: "2", title: "深入淺出 GraphQL", author: "Bob" },
-];
 
 // 定義 GraphQL Schema
 const typeDefs = gql`
